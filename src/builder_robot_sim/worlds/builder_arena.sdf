@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<sdf version="1.10">
+  <world name="builder_arena">
+
+    <!-- Explicit Gazebo Sim systems required for physics, rendering and sensors -->
+    <plugin filename="gz-sim-physics-system"
+            name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-scene-broadcaster-system"
+            name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system"
+            name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <gravity>0 0 -9.81</gravity>
+
+    <physics name="physics" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <scene>
+      <ambient>0.45 0.45 0.45 1</ambient>
+      <background>0.08 0.08 0.08 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 8 0.4 -0.6 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.3 0.2 -1.0</direction>
+    </light>
+
+    <!-- 11 m x 11 m floor -->
+    <model name="arena_floor">
+      <static>true</static>
+      <pose>0 0 -0.025 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>11 11 0.05</size></box></geometry>
+        </collision>
+<visual name="visual">
+  <geometry>
+    <box>
+      <size>11 11 0.05</size>
+    </box>
+  </geometry>
+
+  <material>
+    <ambient>0.35 0.35 0.35 1</ambient>
+    <diffuse>0.55 0.55 0.55 1</diffuse>
+    <specular>0.10 0.10 0.10 1</specular>
+  </material>
+</visual> 
+      </link>
+    </model>
+
+    <!-- Four perimeter walls -->
+    <model name="wall_north">
+      <static>true</static>
+      <pose>0 5.5 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>11 0.10 0.30</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>11 0.10 0.30</size></box></geometry></visual>
+      </link>
+    </model>
+
+    <model name="wall_south">
+      <static>true</static>
+      <pose>0 -5.5 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>11 0.10 0.30</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>11 0.10 0.30</size></box></geometry></visual>
+      </link>
+    </model>
+
+    <model name="wall_east">
+      <static>true</static>
+      <pose>5.5 0 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.10 11 0.30</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.10 11 0.30</size></box></geometry></visual>
+      </link>
+    </model>
+
+    <model name="wall_west">
+      <static>true</static>
+      <pose>-5.5 0 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.10 11 0.30</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.10 11 0.30</size></box></geometry></visual>
+      </link>
+    </model>
+
+    <!-- Internal obstacles for SLAM -->
+    <model name="obstacle_1">
+      <static>true</static>
+      <pose>-1.8 1.8 0.35 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>2.2 0.35 0.70</size></box></geometry></collision>
+<visual name="visual">
+  <geometry>
+    <box>
+      <size>2.2 0.35 0.70</size>
+    </box>
+  </geometry>
+
+  <material>
+    <ambient>0.05 0.15 0.35 1</ambient>
+    <diffuse>0.10 0.30 0.80 1</diffuse>
+    <specular>0.20 0.20 0.20 1</specular>
+  </material>
+</visual>
+      </link>
+    </model>
+
+    <model name="obstacle_2">
+      <static>true</static>
+      <pose>2.0 1.0 0.30 0 0 1.5707963</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>1.6 0.35 0.60</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>1.6 0.35 0.60</size></box></geometry></visual>
+      </link>
+    </model>
+
+    <model name="obstacle_3">
+      <static>true</static>
+      <pose>0.8 -2.2 0.35 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.45 2.2 0.70</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.45 2.2 0.70</size></box></geometry></visual>
+      </link>
+    </model>
+
+    <model name="obstacle_4">
+      <static>true</static>
+      <pose>-3.1 -2.5 0.25 0 0 0.5</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>1.0 1.0 0.50</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>1.0 1.0 0.50</size></box></geometry></visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

@@ -1,0 +1,11 @@
+# Bỏ qua các thư mục build của ROS 2
+build/
+install/
+log/
+
+# Bỏ qua các file cấu hình riêng của VS Code (nếu muốn)
+.vscode/
+
+# Bỏ qua các file python biên dịch
+__pycache__/
+*.pyc

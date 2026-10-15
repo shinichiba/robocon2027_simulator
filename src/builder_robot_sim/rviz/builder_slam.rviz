@@ -1,0 +1,76 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Enabled: true
+      Name: Grid
+      Plane: XY
+      Plane Cell Count: 20
+      Cell Size: 0.5
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Name: TF
+      Frame Timeout: 15
+      Marker Scale: 0.3
+      Show Axes: true
+      Show Names: true
+    - Class: rviz_default_plugins/RobotModel
+      Enabled: true
+      Name: RobotModel
+      Robot Description: robot_description
+      Alpha: 1
+    - Class: rviz_default_plugins/LaserScan
+      Enabled: true
+      Name: LiDAR
+      Topic: /scan
+      Size (Pixels): 3
+      Style: Points
+      Decay Time: 0
+      Reliability Policy: Best Effort
+      History Policy: Keep Last
+      Queue Size: 10
+    - Class: rviz_default_plugins/Map
+      Enabled: true
+      Name: SLAM Map
+      Topic: /map
+      Alpha: 0.7
+      Color Scheme: map
+    - Class: rviz_default_plugins/Odometry
+      Enabled: true
+      Name: Odometry
+      Topic: /mecanum_controller/odometry
+      Keep: 100
+      Shape:
+        Alpha: 1
+        Axes Length: 0.3
+        Axes Radius: 0.03
+      Covariance:
+        Position:
+          Color: 255; 255; 0
+          Alpha: 0.3
+        Orientation:
+          Color: 255; 0; 255
+          Alpha: 0.3
+  Global Options:
+    Fixed Frame: map
+    Frame Rate: 30
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 9
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0
+      Pitch: 1.0
+      Yaw: 0.0
