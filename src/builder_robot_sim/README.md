@@ -2,7 +2,7 @@
 
 ROS 2 Lyrical + Gazebo Jetty simulation of a 600x600 mm mecanum mobile robot.
 
-## Build
+## Build Them tu dong bien moi truong
 ```bash
 cd ~/builder_ws
 rosdep install --from-paths src --ignore-src -r -y
