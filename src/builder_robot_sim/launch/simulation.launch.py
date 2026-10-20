@@ -8,6 +8,7 @@ from launch.actions import (
     IncludeLaunchDescription,
     ExecuteProcess,
     RegisterEventHandler,
+    SetEnvironmentVariable,
 )
 from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -24,7 +25,7 @@ def generate_launch_description():
     world_file = os.path.join(
         pkg_share,
         'worlds',
-        'robocon2027_arena.sdf '#robocon2027_arena.sdf builder_arena.sdf
+        'robocon2027_arena.sdf'#robocon2027_arena.sdf builder_arena.sdf
     )
 
     robot_description_file = os.path.join(
@@ -43,7 +44,25 @@ def generate_launch_description():
         'config',
         'bridge.yaml'
     )
+    # =========================================================
+    # set_env_action
+    # =========================================================
+    # 1. Định nghĩa đường dẫn tới thư mục models của bạn
+    # Sử dụng os.path.expanduser('~') để thay thế cho dấu '~' trong Python
+    models_path = os.path.join(pkg_share, 'models')
 
+    # Nếu hệ thống đã có sẵn biến GZ_SIM_RESOURCE_PATH, ta sẽ cộng chuỗi nối tiếp nó
+    current_gz_path = os.environ.get('GZ_SIM_RESOURCE_PATH', '')
+    if current_gz_path:
+        full_gz_path = f"{models_path}:{current_gz_path}"
+    else:
+        full_gz_path = models_path
+
+    # 2. Tạo hành động cấu hình biến môi trường cho Gazebo
+    set_env_action = SetEnvironmentVariable(
+        name='GZ_SIM_RESOURCE_PATH', 
+        value=full_gz_path
+    )
     # =========================================================
     # Arguments
     # =========================================================
@@ -329,7 +348,7 @@ def generate_launch_description():
     # =========================================================
 
     return LaunchDescription([
-
+        set_env_action,
         declare_use_sim_time,
 
         gazebo,

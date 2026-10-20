@@ -4,7 +4,7 @@ project(builder_robot_sim)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY urdf worlds config launch rviz maps
+  DIRECTORY urdf models worlds config launch rviz maps
   DESTINATION share/${PROJECT_NAME}
 )
 
