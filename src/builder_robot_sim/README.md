@@ -12,6 +12,7 @@ source install/setup.bash
 
 ## Run simulation
 ```bash
+export GZ_SIM_RESOURCE_PATH=~/robocon2027_ws/src/builder_robot_sim/models:$GZ_SIM_RESOURCE_PATH
 ros2 launch builder_robot_sim simulation.launch.py
 ```
 
